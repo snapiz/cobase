@@ -1,0 +1,15 @@
+{
+  "name": "root",
+  "private": true,
+  "scripts": {
+    "dev": "lerna run dev --parallel"
+  },
+  "workspaces": [
+    "api",
+    "worker",
+    "web"
+  ],
+  "devDependencies": {
+    "lerna": "^4.0.0"
+  }
+}

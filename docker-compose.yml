@@ -1,0 +1,78 @@
+version: "3.4"
+
+services:
+  eventstore:
+    image: eventstore/eventstore:20.10.2-buster-slim
+    environment:
+      - EVENTSTORE_CLUSTER_SIZE=1
+      - EVENTSTORE_RUN_PROJECTIONS=All
+      - EVENTSTORE_START_STANDARD_PROJECTIONS=true
+      - EVENTSTORE_EXT_TCP_PORT=1113
+      - EVENTSTORE_EXT_HTTP_PORT=2113
+      - EVENTSTORE_INSECURE=true
+      - EVENTSTORE_ENABLE_EXTERNAL_TCP=true
+      - EVENTSTORE_ENABLE_ATOM_PUB_OVER_HTTP=true
+    ports:
+      - "1113:1113"
+      - "2113:2113"
+    volumes:
+      - type: volume
+        source: eventstore-volume-data
+        target: /var/lib/eventstore
+      - type: volume
+        source: eventstore-volume-logs
+        target: /var/log/eventstore
+
+  couchbase:
+    image: registry.gitlab.com/timada/ci:couchbase
+    volumes:
+      - couchbase-data:/opt/couchbase/var
+    ports:
+      - 8091:8091
+      - 8092:8092
+      - 8093:8093
+      - 8094:8094
+      - 11210:11210
+  
+  redis:
+    image: redis:6.2.1-alpine
+    ports:
+      - 6379:6379
+
+  keycloak:
+    image: quay.io/keycloak/keycloak:13.0.0
+    volumes:
+      - keycloak-data:/opt/jboss/keycloak/standalone/data
+    environment:
+      - KEYCLOAK_USER=admin
+      - KEYCLOAK_PASSWORD=changeit
+      - KEYCLOAK_FRONTEND_URL=https://sso.timada.dev/auth/
+
+  nginx:
+    image: nginx:1.20-alpine
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    depends_on:
+      - websocket
+      - keycloak
+    ports:
+      - "443:443"
+    volumes:
+      - ./.docker/certs:/etc/x509/https
+      - ./.docker/nginx.conf:/etc/nginx/conf.d/timada.conf
+
+  websocket:
+    image: timada0/websocket:1.0.5
+    depends_on:
+      - redis
+    env_file:
+      - ./.docker/.env.local
+    environment:
+      - WSS_REDIS_URL=redis://redis
+      - WSS_REDIS_CHANNEL=wss_timada
+
+volumes:
+  eventstore-volume-data: ~
+  eventstore-volume-logs: ~
+  couchbase-data: ~
+  keycloak-data: ~

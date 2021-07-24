@@ -1,0 +1,5 @@
+/target
+.env.local
+.docker/certs
+build
+node_modules

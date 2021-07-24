@@ -1,0 +1,27 @@
+{
+  "name": "api",
+  "version": "1.0.0",
+  "scripts": {
+    "dev": "cargo run",
+    "eslint": "eslint 'src/**/*.{ts,tsx}' --max-warnings=0 --no-ignore",
+    "e2e": "jest"
+  },
+  "devDependencies": {
+    "@timada/websocket": "^1.0.5",
+    "@types/faker": "^5.5.7",
+    "@types/jest": "^26.0.24",
+    "axios": "^0.21.1",
+    "dotenv": "^10.0.0",
+    "eslint": "^7.31.0",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-plugin-jest": "^24.3.6",
+    "eslint-plugin-prettier": "^3.4.0",
+    "faker": "^5.5.3",
+    "jest": "^27.0.6",
+    "keycloak-admin": "^1.14.18",
+    "prettier": "^2.3.2",
+    "ts-jest": "^27.0.3",
+    "typescript": "^4.3.5",
+    "ws": "^7.5.3"
+  }
+}

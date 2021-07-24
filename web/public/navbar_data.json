@@ -1,0 +1,14 @@
+{
+  "services": [{ "name": "IAM", "url": "https://iam.timada.dev" }],
+  "navigations": [
+    {
+      "name": "Profile",
+      "url": "/profile"
+    },
+    null,
+    {
+      "name": "Logout",
+      "url": "/logout"
+    }
+  ]
+}
