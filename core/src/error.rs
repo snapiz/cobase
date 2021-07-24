@@ -54,7 +54,7 @@ impl Display for Error {
     fn fmt(&self, f: &mut Formatter<'_>) -> Result {
         let err = match self {
             Error::ValidationErrors(errors) => {
-                errors_to_message("".to_string(), errors).unwrap_or("".to_owned())
+                errors_to_message("".to_string(), errors).unwrap_or_else(|| "".to_owned())
             }
             Error::Unkown(err) => err.to_owned(),
         };
