@@ -3,3 +3,4 @@
 .docker/certs
 build
 node_modules
+__screenshots__
