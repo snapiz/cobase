@@ -5,12 +5,13 @@
     "compilerOptions": {
       "module": "commonjs",
       "esModuleInterop": true
-    }
+    },
+    "files": true
   },
   "compilerOptions": {
     "target": "ESNext",
     "lib": ["DOM", "DOM.Iterable", "ESNext"],
-    "types": ["vite/client"],
+    "types": ["vite/client", "codeceptjs"],
     "baseUrl": "./",
     "paths": {
       "*": ["src/*"]
@@ -28,5 +29,5 @@
     "noEmit": true,
     "jsx": "react"
   },
-  "include": ["./src"]
+  "include": ["./src", "tests/**/*"]
 }

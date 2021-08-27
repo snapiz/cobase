@@ -51,8 +51,6 @@ export async function authKcAdminClient(
   return client;
 }
 
-interface Subscribe {}
-
 export function subscribe<D = unknown>(
   kcAdminClient: KcAdminClient,
   topic: string
@@ -60,7 +58,7 @@ export function subscribe<D = unknown>(
   predicate: (e: Message<D>) => boolean,
   timeoutMs?: number
 ) => Promise<Message<D>> {
-  let messages: Message<D>[] = [];
+  const messages: Message<D>[] = [];
 
   const ws = new WebSocket(process.env.COBASE_TEST_WS_URL, null, {
     rejectUnauthorized: false,

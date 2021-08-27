@@ -10,6 +10,8 @@
     "@timada/websocket": "^1.0.5",
     "@types/faker": "^5.5.7",
     "@types/jest": "^26.0.24",
+    "@typescript-eslint/eslint-plugin": "^4.28.4",
+    "@typescript-eslint/parser": "^4.28.4",
     "axios": "^0.21.1",
     "dotenv": "^10.0.0",
     "eslint": "^7.31.0",
@@ -19,7 +21,7 @@
     "faker": "^5.5.3",
     "jest": "^27.0.6",
     "keycloak-admin": "^1.14.18",
-    "prettier": "^2.3.2",
+    "prettier": "^2.2.1",
     "ts-jest": "^27.0.3",
     "typescript": "^4.3.5",
     "ws": "^7.5.3"
